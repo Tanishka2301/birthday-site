@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f6c945;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card */
+.card {
+    background: #eee;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    width: 330px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Title */
+h2 {
+    margin: 10px 0;
+}
+
+/* Date */
+.date {
+    font-size: 20px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+/* Images */
+.images {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.images img {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Button */
+button {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff1e4d;
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    color: red;
+    animation: float 6s infinite ease-in;
+}
+
+@keyframes float {
+    0% {transform: translateY(100vh);}
+    100% {transform: translateY(-10vh);}
+}
