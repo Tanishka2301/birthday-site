@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Countdown</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:"Comic Sans MS";
+background:#FFD84D;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+/* CARD */
+.container{
+background:white;
+padding:30px 25px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:15px;
+
+width:340px;
+text-align:center;
+}
+
+/* TITLE */
+#title{
+font-size:24px;
+font-weight:bold;
+}
+
+/* CALENDAR */
+.calendar{
+width:200px;
+height:auto;
+display:block;
+margin:10px auto;
+}
+
+/* TIMER */
+#timer{
+font-size:24px;
+font-weight:bold;
+color:#ff4d6d;
+}
+
+/* GALLERY */
+.gallery{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.gallery img{
+width:65px;
+height:65px;
+border-radius:12px;
+object-fit:cover;
+}
+
+/* BUTTON */
+button{
+padding:12px 20px;
+border:none;
+border-radius:12px;
+background:#ff4d6d;
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff3355;
+transform:scale(1.05);
+}
+
+/* HEARTS */
+.heart{
+position:fixed;
+top:-10px;
+font-size:18px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh)}
+100%{transform:translateY(110vh)}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="title">Birthday Countdown ❤️</div>
+
+<img src="img5.png" class="calendar">
+
+<div id="timer"></div>
+
+<div class="gallery">
+<img src="img1.jpg">
+<img src="img2.jpg">
+<img src="img3.jpg">
+<img src="img4.jpg">
+</div>
+
+<button onclick="playSong()">Play Our Song ❤️</button>
+
+</div>
+
+<script>
+
+/* 🎯 BIRTHDAY DATE → 8 APRIL 2026 */
+const birthday = new Date("April 10, 2026 00:00:00");
+
+/* TIMER */
+function updateTimer(){
+
+const now = new Date().getTime();
+const distance = birthday - now;
+
+const days = Math.floor(distance/(1000*60*60*24));
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds = Math.floor((distance%(1000*60))/1000);
+
+const current = new Date();
+const month = current.getMonth();
+const date = current.getDate();
+
+const title = document.getElementById("title");
+
+if(month==3 && date==10){
+title.innerHTML="🎉 HAPPY BIRTHDAY  🎉";
+document.getElementById("timer").innerHTML="";
+startConfetti();
+}
+else{
+document.getElementById("timer").innerHTML=
+days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+}
+
+}
+
+setInterval(updateTimer,1000);
+
+/* CONFETTI */
+function startConfetti(){
+setInterval(function(){
+confetti({
+particleCount:150,
+spread:120,
+origin:{y:0.6}
+});
+},1500);
+}
+
+/* SONG */
+function playSong(){
+var audio = new Audio("song.mp3");
+audio.play();
+}
+
+/* HEARTS */
+function createHearts(){
+
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+
+setInterval(createHearts,300);
+
+updateTimer();
+
+</script>
+
+</body>
+</html>
